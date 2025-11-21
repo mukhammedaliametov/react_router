@@ -7,8 +7,8 @@ const ProductDetails = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-  window.scrollTo(0, 0);
-}, []);
+    window.scrollTo(0, 0);
+  }, []);
 
   const param = useParams();
 
@@ -39,12 +39,8 @@ const ProductDetails = () => {
           </div>
         </div>
         <div>
-          <h1 className="text-[28px] font-bold text-text">
-            {data.title}
-          </h1>
-          <p className="text-[16px] text-text mt-3">
-            {data.description}
-          </p>
+          <h1 className="text-[28px] font-bold text-text">{data.title}</h1>
+          <p className="text-[16px] text-text mt-3">{data.description}</p>
           <div className="flex items-center gap-2 mt-3">
             <IoIosStar className="text-yellow-400 text-[22px]" />
             <p className="font-semibold text-[18px] text-text">{data.rating}</p>
@@ -56,8 +52,12 @@ const ProductDetails = () => {
             Stock: {data.stock} pcs
           </p>
           <div className="mt-2 text-[14px] text-gray-500">
-            <p>Brand: <span className="font-semibold">{data.brand}</span></p>
-            <p>Category: <span className="font-semibold">{data.category}</span></p>
+            <p>
+              Brand: <span className="font-semibold">{data.brand}</span>
+            </p>
+            <p>
+              Category: <span className="font-semibold">{data.category}</span>
+            </p>
           </div>
           <button className="mt-6 bg-black cursor-pointer text-white px-6 py-3 rounded-full hover:bg-gray-900 transition">
             Add to Cart

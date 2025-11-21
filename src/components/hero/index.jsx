@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import banner from "../../assets/banner.png";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 const Hero = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
       <div className="relative max-w-[1220px] mx-auto px-[16px] xl:px-0 pt-[10px]">
         <img src={banner} className="w-full" alt="banner" />
