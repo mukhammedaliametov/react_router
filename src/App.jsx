@@ -7,20 +7,38 @@ import Services from "./pages/services";
 import Blog from "./pages/blog";
 import Contact from "./pages/contact";
 import ProductDetails from "./components/products_details";
+import axios from "axios";
+import RecipesDetails from "./components/recipes_details";
 
 const App = () => {
   const location = useLocation();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
+    axios
+      .get("https://dummyjson.com/products")
+      .then((res) => {
+        setData(res.data);
+        setLoading(false); 
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  }, []);
 
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
+  useEffect(() => {
+    if (data) {
+      setLoading(true);
+      const t = setTimeout(() => setLoading(false), 400);
+      return () => clearTimeout(t);
+    }
+    else {
+      setLoading(true);
+    }
   }, [location.pathname]);
+
   return (
     <>
       {loading && (
@@ -36,6 +54,8 @@ const App = () => {
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/recipes/:id" element={<RecipesDetails />} />
+          <Route path="*" element={<div className="text-center text-3xl h-[300px] flex items-center justify-center font-semibold">Opps! <br /> Error 404</div>}></Route>
         </Route>
       </Routes>
     </>
